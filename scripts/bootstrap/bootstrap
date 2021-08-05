@@ -1,0 +1,8 @@
+#!/bin/bash
+
+git clone https://www.github.com/ifcodesdotnet/dwm
+git clone https://www.github.com/ifcodesdotnet/st
+
+
+
+sudo apt install -y make gcc libx11-dev libxft-dev libxinerama-dev xorg xinit sharutils
