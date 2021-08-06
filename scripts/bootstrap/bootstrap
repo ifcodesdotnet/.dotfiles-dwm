@@ -1,8 +1,67 @@
 #!/bin/bash
+#
+# Script name: bootstrap
+# Description: Install dependencies necessary to build and install suckless dwm.
+# Dependencies:
+# GitHub: https://github.com/ifcodesdotnet/.dotfiles-dwm
+# Contributors: Ismael Fernandez
+
+source $HOME/.dotfiles-dwm/scripts/bootstrap/bootstrap-variables/apt-packages
+
+sudo echo > /dev/null 2>&1
+
+update_apt(){
+  echo updating apt cache.
+
+  sudo apt update
+  if [ $? -ne 0 ];
+  then
+      clear
+      echo failure updating apt cache.
+      exit
+  fi
+
+  echo completed updating apt cache
+}
+
+upgrade_apt(){
+  echo upgrading apt packages.
+
+  sudo apt upgrade -y
+  if [ $? -ne 0 ];
+  then
+      clear
+      echo failure upgrading apt packages.
+      exit
+  fi
+
+  echo completed upgrading apt packages.
+}
+
+install_apt_packages(){
+  echo installing apt packages.
+
+  for package in "${!apt_packages[@]}";
+  do
+    echo installing ${apt_packages[$package]} and dependencies.
+    echo
+    sleep 1
+
+    sudo apt install -y ${apt_packages[$package]}
+    if [ $? -ne 0 ];
+    then
+        clear
+        echo failure installing ${apt_packages[$package]}.
+        exit
+    fi
+  done
+
+  echo completed installing apt packages.
+}
+
+update_apt
+upgrade_apt
+install_apt_packages
 
 git clone https://www.github.com/ifcodesdotnet/dwm
 git clone https://www.github.com/ifcodesdotnet/st
-
-
-
-sudo apt install -y make gcc libx11-dev libxft-dev libxinerama-dev xorg xinit sharutils

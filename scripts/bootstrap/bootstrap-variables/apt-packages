@@ -1,0 +1,12 @@
+#!/bin/bash
+apt_packages=()
+apt_packages+=("sudo")
+apt_packages+=("git")
+apt_packages+=("make")
+apt_packages+=("gcc")
+apt_packages+=("libx11-dev")
+apt_packages+=("libxft-dev")
+apt_packages+=("libxinerama-dev")
+apt_packages+=("sharutils")
+apt_packages+=("xorg")
+apt_packages+=("xinit")
