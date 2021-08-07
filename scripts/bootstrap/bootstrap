@@ -63,5 +63,12 @@ update_apt
 upgrade_apt
 install_apt_packages
 
+#Cloning my forks of apps
 git clone https://www.github.com/ifcodesdotnet/dwm
 git clone https://www.github.com/ifcodesdotnet/st
+git clone https://www.github.com/ifcodesdotnet/dmenu
+
+#Adding upstream remotes
+git remote add suckless https://git.suckless.org/dwm
+git remote add suckless https://git.suckless.org/st
+git remote add suckless https://git.suckless.org/dmenu
