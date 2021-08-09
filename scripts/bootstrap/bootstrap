@@ -72,8 +72,22 @@ add_suckless_upstream_remotes(){
   git -C ~/Source/dmenu remote add upstream https://git.suckless.org/dmenu
 }
 
+create_sym_link(){
+  ln -s ~/.dotfiles-dwm/configs/x11/.xinitrc ~
+}
+
+build_programs(){
+  sudo make -C ~/Source/dwm clean install
+  sudo make -C ~/Source/st clean install
+  sudo make -C ~/Source/dmenu clean install
+}
+
 update_apt
 upgrade_apt
 install_apt_packages
 clone_suckless_forks
 add_suckless_upstream_remotes
+
+#needs to clean these up
+create_sym_link
+build_programs
