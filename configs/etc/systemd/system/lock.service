@@ -1,0 +1,12 @@
+[Unit]
+Description=Lock
+Before=sleep.target
+
+[Service]
+User=1000
+Environment=DISPLAY=:0
+ExecStart=slock && systemctl suspend
+ExecStartPost=sleep 1
+
+[Install]
+WantedBy=sleep.target
