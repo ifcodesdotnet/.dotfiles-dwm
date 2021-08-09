@@ -59,16 +59,34 @@ install_apt_packages(){
   echo completed installing apt packages.
 }
 
+clone_suckless_forks(){
+  mkdir ~/Source
+  git -C ~/Source git clone https://www.github.com/ifcodesdotnet/dwm
+  git -C ~/Source git clone https://www.github.com/ifcodesdotnet/st
+  #git -C ~/Source git clone https://www.github.com/ifcodesdotnet/dmenu
+}
+
+add_suckless_upstream_remotes(){
+  git -C ~/Source/dwm remote add upstream https://git.suckless.org/dwm
+  git -C ~/Source/st remote add upstream https://git.suckless.org/st
+  #git -C ~/Source/dmenu remote add upstream https://git.suckless.org/dmenu
+}
+
 update_apt
 upgrade_apt
 install_apt_packages
+clone_suckless_forks
+add_suckless_upstream_remotes
+
+
+
 
 #Cloning my forks of apps
-git clone https://www.github.com/ifcodesdotnet/dwm
-git clone https://www.github.com/ifcodesdotnet/st
-git clone https://www.github.com/ifcodesdotnet/dmenu
+#git clone https://www.github.com/ifcodesdotnet/dwm
+#git clone https://www.github.com/ifcodesdotnet/st
+#git clone https://www.github.com/ifcodesdotnet/dmenu
 
 #Adding upstream remotes
-git remote add suckless https://git.suckless.org/dwm
-git remote add suckless https://git.suckless.org/st
-git remote add suckless https://git.suckless.org/dmenu
+#git remote add suckless https://git.suckless.org/dwm
+#git remote add suckless https://git.suckless.org/st
+#git remote add suckless https://git.suckless.org/dmenu
