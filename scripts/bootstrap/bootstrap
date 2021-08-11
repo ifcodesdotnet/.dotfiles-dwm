@@ -79,7 +79,7 @@ create_sym_link(){
 apply_stow_configs(){
   stow -v -d $HOME/.dotfiles-dwm/configs -t $HOME/ x11
   stow -v -d $HOME/.dotfiles-dwm/configs -t $HOME/ vim
-  sudo stow -v -d $HOME/.dotfiles-dwm/configs -t etc/ etc
+  sudo stow -v -d $HOME/.dotfiles-dwm/configs -t /etc etc
 }
 
 build_programs(){
