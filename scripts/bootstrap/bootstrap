@@ -76,6 +76,12 @@ create_sym_link(){
   ln -s ~/.dotfiles-dwm/configs/x11/.xinitrc ~
 }
 
+apply_stow_configs(){
+  stow -v -d $HOME/.dotfiles-dwm/configs -t $HOME/ x11
+  stow -v -d $HOME/.dotfiles-dwm/configs -t $HOME/ vim
+  sudo stow -v -d $HOME/.dotfiles-dwm/configs -t etc/ etc
+}
+
 build_programs(){
   sudo make -C ~/Source/dwm clean install
   sudo make -C ~/Source/st clean install
@@ -89,5 +95,6 @@ clone_suckless_forks
 add_suckless_upstream_remotes
 
 #needs to clean these up
-create_sym_link
+#create_sym_link
+apply_stow_configs
 build_programs
