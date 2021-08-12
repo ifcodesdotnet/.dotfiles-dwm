@@ -7,7 +7,7 @@
 # Contributors: Ismael Fernandez
 
 source $HOME/.dotfiles-dwm/scripts/bootstrap/bootstrap-variables/apt-packages
-source $HOME/.dotfiles-dwm/scripts/bootstrap/bootstrap-variables/suckless_software
+source $HOME/.dotfiles-dwm/scripts/bootstrap/bootstrap-variables/suckless-software
 
 sudo echo > /dev/null 2>&1
 
