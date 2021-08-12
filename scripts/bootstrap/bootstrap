@@ -64,12 +64,14 @@ clone_suckless_forks(){
   git -C ~/Source clone https://www.github.com/ifcodesdotnet/dwm
   git -C ~/Source clone https://www.github.com/ifcodesdotnet/st
   git -C ~/Source clone https://www.github.com/ifcodesdotnet/dmenu
+  git -C ~/Source clone https://www.github.com/ifcodesdotnet/slock
 }
 
 add_suckless_upstream_remotes(){
   git -C ~/Source/dwm remote add upstream https://git.suckless.org/dwm
   git -C ~/Source/st remote add upstream https://git.suckless.org/st
   git -C ~/Source/dmenu remote add upstream https://git.suckless.org/dmenu
+  git -C ~/Source/dmenu remote add upstream https://git.suckless.org/slock
 }
 
 create_sym_link(){
@@ -86,6 +88,7 @@ build_programs(){
   sudo make -C ~/Source/dwm clean install
   sudo make -C ~/Source/st clean install
   sudo make -C ~/Source/dmenu clean install
+  sudo make -C ~/Source/slock clean install
 }
 
 update_apt
