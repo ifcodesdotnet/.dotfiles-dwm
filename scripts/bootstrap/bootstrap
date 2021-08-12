@@ -91,6 +91,10 @@ build_programs(){
   sudo make -C ~/Source/slock clean install
 }
 
+enable_services(){
+  sudo systemctl enable lock.service
+}
+
 update_apt
 upgrade_apt
 install_apt_packages
@@ -98,3 +102,4 @@ clone_suckless_forks
 add_suckless_upstream_remotes
 apply_stow_configs
 build_programs
+enable_services
