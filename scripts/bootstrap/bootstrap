@@ -93,8 +93,5 @@ upgrade_apt
 install_apt_packages
 clone_suckless_forks
 add_suckless_upstream_remotes
-
-#needs to clean these up
-#create_sym_link
 apply_stow_configs
 build_programs
