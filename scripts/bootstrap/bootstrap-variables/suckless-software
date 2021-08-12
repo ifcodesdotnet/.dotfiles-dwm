@@ -1,0 +1,6 @@
+#!/bin/bash
+suckless_software=()
+suckless_software+=("dwm")
+suckless_software+=("st")
+suckless_software+=("dmenu")
+suckless_software+=("slock")

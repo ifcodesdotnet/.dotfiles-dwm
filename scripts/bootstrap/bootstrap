@@ -7,6 +7,7 @@
 # Contributors: Ismael Fernandez
 
 source $HOME/.dotfiles-dwm/scripts/bootstrap/bootstrap-variables/apt-packages
+source $HOME/.dotfiles-dwm/scripts/bootstrap/bootstrap-variables/suckless_software
 
 sudo echo > /dev/null 2>&1
 
@@ -60,11 +61,25 @@ install_apt_packages(){
 }
 
 clone_suckless_forks(){
-  mkdir ~/Source
-  git -C ~/Source clone https://www.github.com/ifcodesdotnet/dwm
-  git -C ~/Source clone https://www.github.com/ifcodesdotnet/st
-  git -C ~/Source clone https://www.github.com/ifcodesdotnet/dmenu
-  git -C ~/Source clone https://www.github.com/ifcodesdotnet/slock
+  #mkdir ~/Source
+  # git -C ~/Source clone https://www.github.com/ifcodesdotnet/dwm
+  # git -C ~/Source clone https://www.github.com/ifcodesdotnet/st
+  # git -C ~/Source clone https://www.github.com/ifcodesdotnet/dmenu
+  # git -C ~/Source clone https://www.github.com/ifcodesdotnet/slock
+  #echo ${suckless-software[$application]}
+
+  if [ ! -d "$HOME/Source" ]
+  then
+      mkdir ~/Source
+  fi
+
+  for application in "${!suckless_software[@]}";
+  do
+    if [ ! -d "$HOME/Source" ${suckless_software[$application]} ]
+    then
+       git -C ~/Source clone https://www.github.com/ifcodesdotnet/${suckless_software[$application]}
+    fi
+  done
 }
 
 add_suckless_upstream_remotes(){
@@ -95,11 +110,13 @@ enable_services(){
   sudo systemctl enable lock.service
 }
 
-update_apt
-upgrade_apt
-install_apt_packages
+# update_apt
+# upgrade_apt
+# install_apt_packages
+# clone_suckless_forks
+# add_suckless_upstream_remotes
+# apply_stow_configs
+# build_programs
+# enable_services
+
 clone_suckless_forks
-add_suckless_upstream_remotes
-apply_stow_configs
-build_programs
-enable_services
