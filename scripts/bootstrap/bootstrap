@@ -11,7 +11,7 @@ source $HOME/.dotfiles-dwm/scripts/bootstrap/bootstrap-variables/suckless-softwa
 
 sudo echo > /dev/null 2>&1
 
-update_apt(){
+update_apt_cache(){
   echo updating apt cache.
 
   sudo apt update -y
@@ -21,11 +21,9 @@ update_apt(){
       echo failure updating apt cache.
       exit
   fi
-
-  echo completed updating apt cache
 }
 
-upgrade_apt(){
+upgrade_apt_packages(){
   echo upgrading apt packages.
 
   sudo apt upgrade -y
@@ -35,18 +33,11 @@ upgrade_apt(){
       echo failure upgrading apt packages.
       exit
   fi
-
-  echo completed upgrading apt packages.
 }
 
 install_apt_packages(){
-  echo installing apt packages.
-
   for package in "${!apt_packages[@]}";
   do
-    echo installing ${apt_packages[$package]} and dependencies.
-    echo
-    sleep 1
 
     sudo apt install -y ${apt_packages[$package]}
     if [ $? -ne 0 ];
@@ -56,18 +47,9 @@ install_apt_packages(){
         exit
     fi
   done
-
-  echo completed installing apt packages.
 }
 
 clone_suckless_forks(){
-  #mkdir ~/Source
-  # git -C ~/Source clone https://www.github.com/ifcodesdotnet/dwm
-  # git -C ~/Source clone https://www.github.com/ifcodesdotnet/st
-  # git -C ~/Source clone https://www.github.com/ifcodesdotnet/dmenu
-  # git -C ~/Source clone https://www.github.com/ifcodesdotnet/slock
-  #echo ${suckless-software[$application]}
-
   if [ ! -d "$HOME/Source" ]
   then
       mkdir ~/Source
@@ -83,14 +65,13 @@ clone_suckless_forks(){
 }
 
 add_suckless_upstream_remotes(){
-  git -C ~/Source/dwm remote add upstream https://git.suckless.org/dwm
-  git -C ~/Source/st remote add upstream https://git.suckless.org/st
-  git -C ~/Source/dmenu remote add upstream https://git.suckless.org/dmenu
-  git -C ~/Source/dmenu remote add upstream https://git.suckless.org/slock
-}
-
-create_sym_link(){
-  ln -s ~/.dotfiles-dwm/configs/x11/.xinitrc ~
+  for application in "${suckless_software[@]}";
+  do
+    if [ -d "$HOME/Source/"${suckless_software[$application]} ]
+    then
+       git -C ~/Source/${suckless_software[$application]} remote add upstream https://git.suckless.org/${suckless_software[$application]}
+    fi
+  done
 }
 
 apply_stow_configs(){
@@ -99,22 +80,28 @@ apply_stow_configs(){
   sudo stow -v -d $HOME/.dotfiles-dwm/configs -t /etc etc
 }
 
+
+#not working correctly
 build_programs(){
-  sudo make -C ~/Source/dwm clean install
-  sudo make -C ~/Source/st clean install
-  sudo make -C ~/Source/dmenu clean install
-  sudo make -C ~/Source/slock clean install
+  for application in "${suckless_software[@]}";
+  do
+    if [ -d "$HOME/Source/"${suckless_software[$application]} ]
+    then
+       sudo make -C ~/Source/${suckless_software[$application]} clean install
+    fi
+  done
 }
 
+#not working correctly
 enable_services(){
   sudo systemctl enable lock.service
 }
 
-update_apt
-upgrade_apt
+update_apt_cache
+upgrade_apt_packages
 install_apt_packages
 clone_suckless_forks
-# add_suckless_upstream_remotes
-# apply_stow_configs
-# build_programs
-# enable_services
+add_suckless_upstream_remotes
+apply_stow_configs
+build_programs
+enable_services
