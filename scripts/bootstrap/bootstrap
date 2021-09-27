@@ -14,7 +14,7 @@ sudo echo > /dev/null 2>&1
 update_apt(){
   echo updating apt cache.
 
-  sudo apt update
+  sudo apt update -y
   if [ $? -ne 0 ];
   then
       clear
@@ -75,7 +75,7 @@ clone_suckless_forks(){
 
   for application in "${!suckless_software[@]}";
   do
-    if [ ! -d "$HOME/Source" ${suckless_software[$application]} ]
+    if [ ! -d "$HOME/Source/"${suckless_software[$application]} ]
     then
        git -C ~/Source clone https://www.github.com/ifcodesdotnet/${suckless_software[$application]}
     fi
@@ -110,13 +110,11 @@ enable_services(){
   sudo systemctl enable lock.service
 }
 
-# update_apt
-# upgrade_apt
-# install_apt_packages
-# clone_suckless_forks
+update_apt
+upgrade_apt
+install_apt_packages
+clone_suckless_forks
 # add_suckless_upstream_remotes
 # apply_stow_configs
 # build_programs
 # enable_services
-
-clone_suckless_forks
